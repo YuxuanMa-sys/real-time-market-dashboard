@@ -109,7 +109,7 @@ def create_database_schema():
     CREATE INDEX IF NOT EXISTS idx_news_sentiment_symbol ON f_news_sentiment(symbol);
     CREATE INDEX IF NOT EXISTS idx_news_sentiment_fetched_at ON f_news_sentiment(fetched_at);
     
-    -- Insert default symbols
+    -- Insert default symbols (all symbols used in ETL scripts)
     INSERT INTO dim_symbol (symbol, name, sector) VALUES
     ('SPY', 'SPDR S&P 500 ETF Trust', 'Broad Market'),
     ('QQQ', 'Invesco QQQ Trust', 'Technology'),
@@ -126,10 +126,11 @@ def create_database_schema():
     ('XLU', 'Utilities Select Sector SPDR Fund', 'Utilities'),
     ('XLB', 'Materials Select Sector SPDR Fund', 'Materials'),
     ('XLRE', 'Real Estate Select Sector SPDR Fund', 'Real Estate'),
-    ('^VIX', 'CBOE Volatility Index', 'Volatility')
+    ('^VIX', 'CBOE Volatility Index', 'Volatility'),
+    ('VIX', 'CBOE Volatility Index', 'Volatility')  -- For news sentiment script
     ON CONFLICT (symbol) DO NOTHING;
     
-    -- Insert default indicators
+    -- Insert default indicators (all indicators used in FRED ETL script)
     INSERT INTO dim_indicator (indicator_id, name, frequency, description) VALUES
     ('CPIAUCSL', 'Consumer Price Index for All Urban Consumers: All Items', 'Monthly', 'Inflation measure'),
     ('UNRATE', 'Unemployment Rate', 'Monthly', 'Labor market indicator'),
@@ -140,7 +141,17 @@ def create_database_schema():
     ('DGS30', '30-Year Treasury Constant Maturity Rate', 'Daily', 'Long-term mortgage rate'),
     ('GDP', 'Gross Domestic Product', 'Quarterly', 'Economic growth measure'),
     ('PAYEMS', 'All Employees, Total Nonfarm', 'Monthly', 'Employment level'),
-    ('INDPRO', 'Industrial Production Index', 'Monthly', 'Manufacturing activity')
+    ('INDPRO', 'Industrial Production Index', 'Monthly', 'Manufacturing activity'),
+    ('RSXFS', 'Advance Retail Sales: Retail Trade', 'Monthly', 'Consumer spending indicator'),
+    ('HOUST', 'Housing Starts: Total: New Privately Owned Housing Units Started', 'Monthly', 'Housing market indicator'),
+    ('DGORDER', 'Manufacturers New Orders: Durable Goods', 'Monthly', 'Manufacturing orders'),
+    ('TCU', 'Capacity Utilization: Total Industry', 'Monthly', 'Industrial capacity utilization'),
+    ('M2SL', 'M2 Money Stock', 'Monthly', 'Money supply measure'),
+    ('TOTALSA', 'Total Vehicle Sales', 'Monthly', 'Auto industry indicator'),
+    ('CSUSHPISA', 'S&P/Case-Shiller U.S. National Home Price Index', 'Monthly', 'Home price index'),
+    ('RECPROUSM156N', 'Recession Probabilities', 'Monthly', 'Recession probability model'),
+    ('T10Y2Y', '10-Year Treasury Constant Maturity Minus 2-Year Treasury Constant Maturity', 'Daily', 'Yield curve spread'),
+    ('T10Y3M', '10-Year Treasury Constant Maturity Minus 3-Month Treasury Constant Maturity', 'Daily', 'Yield curve spread')
     ON CONFLICT (indicator_id) DO NOTHING;
     """
     
