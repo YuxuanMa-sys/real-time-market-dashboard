@@ -1,0 +1,22 @@
+id,symbol,fetched_at,published_at,source,title,url,vader_compound,vader_positive,vader_negative,vader_neutral,created_at
+1,SPY,2025-10-24 19:04:04.409620,2025-10-24 17:04:04.409394,Financial News,SPY shows strong performance in latest trading session,https://example.com/news/SPY-1,0.5106,0.32,0.0,0.68,2025-10-24 23:04:12.505394
+2,SPY,2025-10-24 19:04:04.409699,2025-10-24 15:04:04.409408,Market Watch,Analysts raise price target for SPY following earnings beat,https://example.com/news/SPY-2,0.0,0.0,0.0,1.0,2025-10-24 23:04:12.505394
+3,SPY,2025-10-24 19:04:04.409752,2025-10-24 13:04:04.409414,Reuters,SPY faces headwinds amid market volatility concerns,https://example.com/news/SPY-3,0.0,0.0,0.0,1.0,2025-10-24 23:04:12.505394
+4,QQQ,2025-10-24 19:04:05.411937,2025-10-24 17:04:05.411711,Financial News,QQQ shows strong performance in latest trading session,https://example.com/news/QQQ-1,0.5106,0.32,0.0,0.68,2025-10-24 23:04:12.505394
+5,QQQ,2025-10-24 19:04:05.412031,2025-10-24 15:04:05.411736,Market Watch,Analysts raise price target for QQQ following earnings beat,https://example.com/news/QQQ-2,0.0,0.0,0.0,1.0,2025-10-24 23:04:12.505394
+6,QQQ,2025-10-24 19:04:05.412100,2025-10-24 13:04:05.411744,Reuters,QQQ faces headwinds amid market volatility concerns,https://example.com/news/QQQ-3,0.0,0.0,0.0,1.0,2025-10-24 23:04:12.505394
+7,IWM,2025-10-24 19:04:06.417127,2025-10-24 17:04:06.416911,Financial News,IWM shows strong performance in latest trading session,https://example.com/news/IWM-1,0.5106,0.32,0.0,0.68,2025-10-24 23:04:12.505394
+8,IWM,2025-10-24 19:04:06.417218,2025-10-24 15:04:06.416936,Market Watch,Analysts raise price target for IWM following earnings beat,https://example.com/news/IWM-2,0.0,0.0,0.0,1.0,2025-10-24 23:04:12.505394
+9,IWM,2025-10-24 19:04:06.417288,2025-10-24 13:04:06.416943,Reuters,IWM faces headwinds amid market volatility concerns,https://example.com/news/IWM-3,0.0,0.0,0.0,1.0,2025-10-24 23:04:12.505394
+10,XLF,2025-10-24 19:04:07.421923,2025-10-24 17:04:07.421770,Financial News,XLF shows strong performance in latest trading session,https://example.com/news/XLF-1,0.5106,0.32,0.0,0.68,2025-10-24 23:04:12.505394
+11,XLF,2025-10-24 19:04:07.421983,2025-10-24 15:04:07.421787,Market Watch,Analysts raise price target for XLF following earnings beat,https://example.com/news/XLF-2,0.0,0.0,0.0,1.0,2025-10-24 23:04:12.505394
+12,XLF,2025-10-24 19:04:07.422031,2025-10-24 13:04:07.421792,Reuters,XLF faces headwinds amid market volatility concerns,https://example.com/news/XLF-3,0.0,0.0,0.0,1.0,2025-10-24 23:04:12.505394
+13,XLK,2025-10-24 19:04:08.427761,2025-10-24 17:04:08.427508,Financial News,XLK shows strong performance in latest trading session,https://example.com/news/XLK-1,0.5106,0.32,0.0,0.68,2025-10-24 23:04:12.505394
+14,XLK,2025-10-24 19:04:08.427852,2025-10-24 15:04:08.427533,Market Watch,Analysts raise price target for XLK following earnings beat,https://example.com/news/XLK-2,0.0,0.0,0.0,1.0,2025-10-24 23:04:12.505394
+15,XLK,2025-10-24 19:04:08.427920,2025-10-24 13:04:08.427541,Reuters,XLK faces headwinds amid market volatility concerns,https://example.com/news/XLK-3,0.0,0.0,0.0,1.0,2025-10-24 23:04:12.505394
+16,XLE,2025-10-24 19:04:09.428729,2025-10-24 17:04:09.428508,Financial News,XLE shows strong performance in latest trading session,https://example.com/news/XLE-1,0.5106,0.32,0.0,0.68,2025-10-24 23:04:12.505394
+17,XLE,2025-10-24 19:04:09.428817,2025-10-24 15:04:09.428533,Market Watch,Analysts raise price target for XLE following earnings beat,https://example.com/news/XLE-2,0.0,0.0,0.0,1.0,2025-10-24 23:04:12.505394
+18,XLE,2025-10-24 19:04:09.428886,2025-10-24 13:04:09.428541,Reuters,XLE faces headwinds amid market volatility concerns,https://example.com/news/XLE-3,0.0,0.0,0.0,1.0,2025-10-24 23:04:12.505394
+19,VIX,2025-10-24 19:04:10.429443,2025-10-24 17:04:10.429332,Financial News,VIX shows strong performance in latest trading session,https://example.com/news/VIX-1,0.5106,0.32,0.0,0.68,2025-10-24 23:04:12.505394
+20,VIX,2025-10-24 19:04:10.429484,2025-10-24 15:04:10.429346,Market Watch,Analysts raise price target for VIX following earnings beat,https://example.com/news/VIX-2,0.0,0.0,0.0,1.0,2025-10-24 23:04:12.505394
+21,VIX,2025-10-24 19:04:10.429515,2025-10-24 13:04:10.429349,Reuters,VIX faces headwinds amid market volatility concerns,https://example.com/news/VIX-3,0.0,0.0,0.0,1.0,2025-10-24 23:04:12.505394

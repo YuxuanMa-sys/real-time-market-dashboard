@@ -1,0 +1,21 @@
+indicator_id,name,frequency,description,created_at
+CPIAUCSL,Consumer Price Index for All Urban Consumers: All Items,Monthly,Inflation measure,2025-10-24 22:20:14.235317
+UNRATE,Unemployment Rate,Monthly,Labor market indicator,2025-10-24 22:20:14.235317
+FEDFUNDS,Federal Funds Effective Rate,Daily,Monetary policy rate,2025-10-24 22:20:14.235317
+UMCSENT,University of Michigan: Consumer Sentiment,Monthly,Consumer confidence,2025-10-24 22:20:14.235317
+DGS10,10-Year Treasury Constant Maturity Rate,Daily,Long-term interest rate,2025-10-24 22:20:14.235317
+DGS2,2-Year Treasury Constant Maturity Rate,Daily,Short-term interest rate,2025-10-24 22:20:14.235317
+DGS30,30-Year Treasury Constant Maturity Rate,Daily,Long-term mortgage rate,2025-10-24 22:20:14.235317
+GDP,Gross Domestic Product,Quarterly,Economic growth measure,2025-10-24 22:20:14.235317
+PAYEMS,"All Employees, Total Nonfarm",Monthly,Employment level,2025-10-24 22:20:14.235317
+INDPRO,Industrial Production Index,Monthly,Manufacturing activity,2025-10-24 22:20:14.235317
+RSXFS,Advance Retail Sales: Retail Trade,Monthly,Retail sales data,2025-10-24 22:57:13.880968
+HOUST,Housing Starts: Total: New Privately Owned Housing Units Started,Monthly,Housing construction,2025-10-24 22:57:13.880968
+DGORDER,Manufacturers New Orders: Durable Goods,Monthly,Manufacturing orders,2025-10-24 22:57:13.880968
+TCU,Capacity Utilization: Total Industry,Monthly,Industrial capacity,2025-10-24 22:57:13.880968
+M2SL,M2 Money Stock,Monthly,Money supply,2025-10-24 22:58:05.826388
+TOTALSA,Total Vehicle Sales,Monthly,Auto sales,2025-10-24 22:58:05.826388
+CSUSHPISA,S&P/Case-Shiller U.S. National Home Price Index,Monthly,Home prices,2025-10-24 22:58:05.826388
+RECPROUSM156N,Recession Probabilities,Monthly,Recession risk,2025-10-24 22:58:05.826388
+T10Y2Y,10-Year Treasury Constant Maturity Minus 2-Year Treasury Constant Maturity,Daily,Yield curve spread,2025-10-24 22:58:05.826388
+T10Y3M,10-Year Treasury Constant Maturity Minus 3-Month Treasury Constant Maturity,Daily,Yield curve spread,2025-10-24 22:58:05.826388
