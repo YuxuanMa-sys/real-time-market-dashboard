@@ -1,0 +1,18 @@
+symbol,name,sector,created_at
+SPY,SPDR S&P 500 ETF Trust,Broad Market,2025-10-24 22:20:14.235317
+QQQ,Invesco QQQ Trust,Technology,2025-10-24 22:20:14.235317
+IWM,iShares Russell 2000 ETF,Small Cap,2025-10-24 22:20:14.235317
+EFA,iShares MSCI EAFE ETF,International,2025-10-24 22:20:14.235317
+VTI,Vanguard Total Stock Market ETF,Broad Market,2025-10-24 22:20:14.235317
+XLF,Financial Select Sector SPDR Fund,Financials,2025-10-24 22:20:14.235317
+XLK,Technology Select Sector SPDR Fund,Technology,2025-10-24 22:20:14.235317
+XLE,Energy Select Sector SPDR Fund,Energy,2025-10-24 22:20:14.235317
+XLI,Industrial Select Sector SPDR Fund,Industrials,2025-10-24 22:20:14.235317
+XLV,Health Care Select Sector SPDR Fund,Health Care,2025-10-24 22:20:14.235317
+XLY,Consumer Discretionary Select Sector SPDR Fund,Consumer Discretionary,2025-10-24 22:20:14.235317
+XLP,Consumer Staples Select Sector SPDR Fund,Consumer Staples,2025-10-24 22:20:14.235317
+XLU,Utilities Select Sector SPDR Fund,Utilities,2025-10-24 22:20:14.235317
+XLB,Materials Select Sector SPDR Fund,Materials,2025-10-24 22:20:14.235317
+XLRE,Real Estate Select Sector SPDR Fund,Real Estate,2025-10-24 22:20:14.235317
+VIX,CBOE Volatility Index,Volatility,2025-10-24 22:20:14.235317
+^VIX,CBOE Volatility Index,Volatility,2025-10-24 22:37:23.559524
