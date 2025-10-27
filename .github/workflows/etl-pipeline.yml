@@ -43,14 +43,6 @@ jobs:
     - name: Create logs directory
       run: mkdir -p logs
     
-    - name: Run database setup (first time only)
-      if: github.event_name == 'workflow_dispatch'
-      env:
-        PG_DSN: ${{ secrets.PG_DSN }}
-        FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
-      run: |
-        python src/setup_database.py
-    
     - name: Run Price Data ETL
       if: github.event.inputs.run_type == 'prices_only' || github.event.inputs.run_type == 'full' || github.event_name == 'schedule'
       env:
