@@ -32,9 +32,9 @@ API_CONFIG = {
 SYMBOLS = {
     'indices': ['SPY', 'QQQ', 'IWM', 'EFA', 'VTI'],
     'sectors': ['XLF', 'XLK', 'XLE', 'XLI', 'XLV', 'XLY', 'XLP', 'XLU', 'XLB', 'XLRE'],
-    'volatility': ['^VIX'],
+    'volatility': ['VIX'],
     'all': ['SPY', 'QQQ', 'IWM', 'EFA', 'VTI', 'XLF', 'XLK', 'XLE', 'XLI', 'XLV', 
-            'XLY', 'XLP', 'XLU', 'XLB', 'XLRE', '^VIX']
+            'XLY', 'XLP', 'XLU', 'XLB', 'XLRE', 'VIX']
 }
 
 MACRO_INDICATORS = {
