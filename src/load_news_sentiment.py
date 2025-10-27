@@ -272,7 +272,7 @@ def main():
     symbols = [
         'SPY', 'QQQ', 'IWM',  # Major indices
         'XLF', 'XLK', 'XLE',  # Key sectors
-        'VIX'  # Volatility
+        '^VIX'  # Volatility (use ^VIX for data fetching)
     ]
     
     logger.info("🚀 Starting news sentiment ETL process")
