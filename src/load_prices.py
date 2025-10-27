@@ -44,7 +44,9 @@ def get_price_data(symbols, period="1mo", interval="1d"):
             
             # Reset index to get date as column
             data = data.reset_index()
-            data['symbol'] = symbol
+            # Map ^VIX to VIX for database consistency
+            db_symbol = 'VIX' if symbol == '^VIX' else symbol
+            data['symbol'] = db_symbol
             
             # Rename columns to match database schema (handle different column names)
             column_mapping = {
