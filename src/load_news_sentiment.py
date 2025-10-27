@@ -41,11 +41,8 @@ def get_news_data(symbols, api_key=None):
         try:
             logger.info(f"Fetching news for {symbol}")
             
-            # For demo purposes, we'll use a simple approach
-            # In production, you might use NewsAPI, Alpha Vantage, or other services
-            
-            # Simulate news data (replace with actual API calls)
-            news_items = get_mock_news_data(symbol)
+            # Use real news API if key is provided, otherwise use mock data
+            news_items = get_real_news_data(symbol, api_key)
             
             for item in news_items:
                 # Analyze sentiment
@@ -119,34 +116,96 @@ def get_real_news_data(symbol, api_key=None):
         return get_mock_news_data(symbol)
     
     try:
-        # Example using NewsAPI (requires subscription)
-        url = f"https://newsapi.org/v2/everything"
-        params = {
-            'q': symbol,
-            'apiKey': api_key,
-            'language': 'en',
-            'sortBy': 'publishedAt',
-            'pageSize': 10
-        }
+        # Query for both the symbol itself and search terms
+        query_terms = [
+            symbol,
+            f"{symbol} stock",
+            f"{symbol} ETF" if symbol in ['SPY', 'QQQ', 'IWM'] else None,
+            f"{symbol} market"
+        ]
         
-        response = requests.get(url, params=params)
-        response.raise_for_status()
+        # Filter out None values
+        query_terms = [q for q in query_terms if q]
         
-        data = response.json()
-        news_items = []
+        all_news_items = []
         
-        for article in data.get('articles', []):
-            news_items.append({
-                'title': article['title'],
-                'source': article['source']['name'],
-                'url': article['url'],
-                'published_at': datetime.fromisoformat(article['publishedAt'].replace('Z', '+00:00'))
-            })
+        # Use the first query term and fetch all pages
+        query = query_terms[0]  # Use main query term
         
-        return news_items
+        try:
+            # Fetch multiple pages to get more results
+            max_pages = 3  # NewsAPI free tier allows up to 100 results (5 pages with pageSize 20)
+            
+            for page in range(1, max_pages + 1):
+                url = "https://newsapi.org/v2/everything"
+                params = {
+                    'q': query,
+                    'apiKey': api_key,
+                    'language': 'en',
+                    'sortBy': 'publishedAt',
+                    'pageSize': 100,  # Maximum allowed by NewsAPI
+                    'page': page,  # Pagination
+                    'from': (datetime.now() - timedelta(days=30)).strftime('%Y-%m-%d'),  # Last 30 days
+                    'to': datetime.now().strftime('%Y-%m-%d')
+                }
+                
+                response = requests.get(url, params=params, timeout=30)
+                
+                if response.status_code != 200:
+                    logger.warning(f"NewsAPI returned status {response.status_code}: {response.text}")
+                    if response.status_code == 426:
+                        logger.warning("Reached maximum quota for NewsAPI free tier")
+                    break
+                
+                data = response.json()
+                
+                articles = data.get('articles', [])
+                if not articles:
+                    break  # No more articles
+                
+                for article in articles:
+                    # Skip articles that don't have required fields
+                    if not article.get('title') or not article.get('publishedAt'):
+                        continue
+                        
+                    try:
+                        # Parse date
+                        pub_date_str = article['publishedAt'].replace('Z', '+00:00')
+                        pub_date = datetime.fromisoformat(pub_date_str)
+                        
+                        news_item = {
+                            'title': article['title'],
+                            'source': article.get('source', {}).get('name', 'Unknown'),
+                            'url': article.get('url', ''),
+                            'published_at': pub_date
+                        }
+                        all_news_items.append(news_item)
+                    except Exception as e:
+                        logger.debug(f"Error parsing article: {e}")
+                        continue
+                
+                logger.debug(f"Fetched page {page}: {len(articles)} articles")
+                
+                # Small delay to respect rate limits
+                time.sleep(1)
+        
+        except Exception as e:
+            logger.error(f"Error fetching news for query '{query}': {e}")
+        
+        # Remove duplicates based on title
+        seen_titles = set()
+        unique_news = []
+        for item in all_news_items:
+            title_lower = item['title'].lower().strip()
+            if title_lower not in seen_titles:
+                seen_titles.add(title_lower)
+                unique_news.append(item)
+        
+        logger.info(f"✅ Fetched {len(unique_news)} unique news articles for {symbol}")
+        return unique_news if unique_news else get_mock_news_data(symbol)
         
     except Exception as e:
-        logger.error(f"Error fetching real news data: {e}")
+        logger.error(f"Error fetching real news data for {symbol}: {e}")
         return get_mock_news_data(symbol)
 
 def load_news_to_db(df, engine):
@@ -163,6 +222,11 @@ def load_news_to_db(df, engine):
     
     try:
         with engine.connect() as conn:
+            # Clear existing data and reset ID sequence
+            logger.info("Clearing existing news sentiment data...")
+            conn.execute(text("TRUNCATE TABLE f_news_sentiment RESTART IDENTITY CASCADE"))
+            conn.commit()
+            
             for _, row in df.iterrows():
                 insert_sql = text("""
                     INSERT INTO f_news_sentiment 
