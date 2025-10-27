@@ -30,16 +30,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
     
-    - name: Test database connection
-      run: |
-        echo "Testing DNS resolution..."
-        host db.jewtxclxsmmhicpenaxf.supabase.co || echo "DNS resolution failed"
-        
-    - name: Configure to prefer IPv4
-      run: |
-        # Try to disable IPv6
-        sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1 2>/dev/null || true
-    
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
@@ -60,16 +50,16 @@ jobs:
       run: |
         python src/load_prices.py
     
-    - name: Run Macroeconomic Data ETL
-      if: github.event.inputs.run_type == 'macro_only' || github.event.inputs.run_type == 'full' || github.event_name == 'schedule'
+    - name: Run Macroeconomic Data ETL (Daily only - FRED updates monthly/weekly)
+      if: github.event.inputs.run_type == 'macro_only' || github.event.inputs.run_type == 'full'
       env:
         PG_DSN: ${{ secrets.PG_DSN }}
         FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
       run: |
         python src/load_fred.py
     
-    - name: Run Google Trends ETL
-      if: github.event.inputs.run_type == 'trends_only' || github.event.inputs.run_type == 'full' || github.event_name == 'schedule'
+    - name: Run Google Trends ETL (Daily only - Google processes once per day)
+      if: github.event.inputs.run_type == 'trends_only' || github.event.inputs.run_type == 'full'
       env:
         PG_DSN: ${{ secrets.PG_DSN }}
       run: |
