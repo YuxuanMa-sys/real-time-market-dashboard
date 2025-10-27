@@ -269,10 +269,11 @@ def main():
     engine = create_engine(pg_dsn)
     
     # Define symbols to track for news
+    # Note: Using 'VIX' (not '^VIX') for news queries since ^ symbol would confuse search
     symbols = [
         'SPY', 'QQQ', 'IWM',  # Major indices
         'XLF', 'XLK', 'XLE',  # Key sectors
-        '^VIX'  # Volatility (use ^VIX for data fetching)
+        'VIX'  # Volatility (database has both ^VIX and VIX)
     ]
     
     logger.info("🚀 Starting news sentiment ETL process")
