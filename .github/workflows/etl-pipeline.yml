@@ -30,6 +30,16 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
     
+    - name: Test database connection
+      run: |
+        echo "Testing DNS resolution..."
+        host db.jewtxclxsmmhicpenaxf.supabase.co || echo "DNS resolution failed"
+        
+    - name: Configure to prefer IPv4
+      run: |
+        # Try to disable IPv6
+        sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1 2>/dev/null || true
+    
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
