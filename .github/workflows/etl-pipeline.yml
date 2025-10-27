@@ -65,7 +65,7 @@ jobs:
       run: |
         python src/load_trends.py
     
-    - name: Run News Sentiment ETL (Daily only - API rate limit: 100 requests per 24 hours)
+    - name: Run News Sentiment ETL (Daily only - API rate limit 100 requests per 24 hours)
       if: github.event.inputs.run_type == 'news_only' || github.event.inputs.run_type == 'full'
       env:
         PG_DSN: ${{ secrets.PG_DSN }}
