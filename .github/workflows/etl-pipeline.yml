@@ -43,6 +43,18 @@ jobs:
     - name: Create logs directory
       run: mkdir -p logs
     
+    - name: Check if daily run (UTC hour check)
+      id: daily_check
+      run: |
+        UTC_HOUR=$(date -u +%H)
+        # Run daily pipelines at UTC hour 6 (daily schedule) or 10-11 (6 AM ET accounting for DST)
+        if [ "$UTC_HOUR" == "06" ] || [ "$UTC_HOUR" == "10" ] || [ "$UTC_HOUR" == "11" ]; then
+          echo "is_daily=true" >> $GITHUB_OUTPUT
+        else
+          echo "is_daily=false" >> $GITHUB_OUTPUT
+        fi
+        echo "UTC hour is: $UTC_HOUR"
+    
     - name: Run Price Data ETL
       if: github.event.inputs.run_type == 'prices_only' || github.event.inputs.run_type == 'full' || github.event_name == 'schedule'
       env:
@@ -51,7 +63,7 @@ jobs:
         python src/load_prices.py
     
     - name: Run Macroeconomic Data ETL (Daily only - FRED updates monthly/weekly)
-      if: github.event.inputs.run_type == 'macro_only' || github.event.inputs.run_type == 'full'
+      if: github.event.inputs.run_type == 'macro_only' || github.event.inputs.run_type == 'full' || (github.event_name == 'schedule' && steps.daily_check.outputs.is_daily == 'true')
       env:
         PG_DSN: ${{ secrets.PG_DSN }}
         FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
@@ -59,14 +71,14 @@ jobs:
         python src/load_fred.py
     
     - name: Run Google Trends ETL (Daily only - Google processes once per day)
-      if: github.event.inputs.run_type == 'trends_only' || github.event.inputs.run_type == 'full'
+      if: github.event.inputs.run_type == 'trends_only' || github.event.inputs.run_type == 'full' || (github.event_name == 'schedule' && steps.daily_check.outputs.is_daily == 'true')
       env:
         PG_DSN: ${{ secrets.PG_DSN }}
       run: |
         python src/load_trends.py
     
     - name: Run News Sentiment ETL (Daily only - API rate limit 100 requests per 24 hours)
-      if: github.event.inputs.run_type == 'news_only' || github.event.inputs.run_type == 'full'
+      if: github.event.inputs.run_type == 'news_only' || github.event.inputs.run_type == 'full' || (github.event_name == 'schedule' && steps.daily_check.outputs.is_daily == 'true')
       env:
         PG_DSN: ${{ secrets.PG_DSN }}
         NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
